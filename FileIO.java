@@ -14,9 +14,9 @@ public class FileIO {
                 numEntries += 1; // determines the size of the String[] array
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Error: file not found");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error, invalid input");
         }
 
         String[] dataArray = new String[numEntries];
@@ -31,9 +31,9 @@ public class FileIO {
             }
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Error: file not found");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error, invalid input");
         }
         return dataArray;
     }
