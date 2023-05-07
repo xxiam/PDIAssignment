@@ -24,7 +24,6 @@ public class Main {
                 provinces.add(projectArray[i].getProvince());
             }
         }
-        //source: https://stackoverflow.com/questions/5283047/integer-arraylist-to-int-array
 
         boolean running = true;
         while (running) {
@@ -156,18 +155,8 @@ public class Main {
     private static double fetchPercentageData(Project[] projectArray, String province, String stage) {
         //fetch total number and percentage of ongoing or complted projects
         double percetage = 0;
-        int total = 0; //gets total projects in province
-        for (int i = 0; i < projectArray.length; i++) {
-            if (projectArray[i].getProvince().equals(province)) {
-                total++;
-            }
-        }
-        int stageTotal = 0; //gets total ongoing or completed projects in province
-        for (int i = 0; i < projectArray.length; i++) {
-            if (projectArray[i].getProvince().equals(province) && projectArray[i].getStage().equals(stage)) {
-                stageTotal++;
-            }
-        }
+        int total = fetchProjectCount(projectArray, province);
+        int stageTotal = fetchStageCount(projectArray, province, stage);
         percetage = (double)stageTotal / (double)total * 100;
         return percetage;
     }

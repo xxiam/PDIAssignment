@@ -1,1 +1,138 @@
 start
+    MAIN:
+
+        data = FileIO.parseCsv(data.csv)
+        projectArray = array(data.length)
+
+        for ii in data.length; do
+            projectArray[ii] = Project(data[ii])
+        done
+        
+        provinces = ArrayList<String>
+        for ii in projectArray.length; do
+            if not provinces.contains(projectArray[ii].getProvince()); then
+                provinces.add(projectArray[ii].getProvince())
+            fi
+        done
+
+        running = false
+        do;
+            OUTPUT "Welcome to the Investments in Indigenous community infrastruture Program."
+            OUTPUT "There are a total of " + projectArray.length + " projects throughout Canada"
+            OUTPUT "Please make a selection from the Menu below."
+            OUTPUT "> All of Canada"
+            for ii in provinces.size; do
+                OUTPUT "> " + provinces.get(ii)
+            done
+            OUTPUT "> Exit Program"
+            
+            INPUT choice
+            if choice == "All of Canada"; then
+                OUTPUT "The total number of projects in Canada: " + projectArray.length
+                ongoingProjects = 0
+                for ii in projectArray.length; do
+                    if projectArray[ii].getStage().equals("Ongoing"); then
+                        ongoingProjects++
+                    fi
+                done
+                OUTPUT "The total number of Ongoing projects: " + ongoingProjects
+                completedProjects = 0
+                for ii in projectArray.length; do
+                    if projectArray[ii].getStage().equals("Completed"); then
+                        completedProjects++
+                    fi
+                done
+                OUTPUT "The total number of Completed projects: " + completedProjects
+                percentage = completedProjects / projectArray.length * 100
+                OUTPUT "The percentage of Completed projects: " + percentage + "%"
+            fi
+
+            else if choice == "Exit Program"; then
+                OUTPUT "Exiting..."
+                running = false
+            fi
+
+            for ii in provinces.size; do
+                if choice == provinces.get(ii); then
+                    OUTPUT "Please make a choice from the statistics below for " + provinces.get(ii) + ":"
+                    OUTPUT "1> Number of projects"
+                    OUTPUT "2> Percentage of all projects located in this province/territory"
+                    OUTPUT "3> Total number and percentage of Ongoing projects"
+                    OUTPUT "4> Total number and percentage of Completed projects"
+                    OUTPUT "5> All of the above statistics"
+                    OUTPUT "0> Return to main menu"
+
+                    INPUT choice2
+                    if choice2 == 1; then
+                        projectCount = fetchProjectCount(projectArray, provinces.get(ii))
+                        OUTPUT "There are a total of " + projectCount + " projects in " + provinces.get(ii)
+                    fi
+                    if choice2 == 2; then
+                        total = projectArray.length
+                        percentage = fetchProjectCount(projectArray, provinces.get(ii)) / total * 100
+                        OUTPUT "The percentage of all projects located in " + provinces.get(ii) + " is " + percentage + "%"
+                    fi
+                    if choice2 == 3; then
+                        percentage = fetchPercentageData(projectArray, provinces.get(ii), "Ongoing")
+                        ongoingCount = fetchStageCount(projectArray, provinces.get(ii), "Ongoing")
+                        OUTPUT "There is a total of " + ongoingCount + " ongoing projects in " + provinces.get(ii) + " which is " + percentage + "% of all projects in " + provinces.get(ii)
+                    fi
+                    if choice2 == 4; then
+                        percentage = fetchPercentageData(projectArray, provinces.get(ii), "Completed")
+                        completedCount = fetchStageCount(projectArray, provinces.get(ii), "Completed")
+                        OUTPUT "There is a total of " + completedCount + " completed projects in " + provinces.get(ii) + " which is " + percentage + "% of all projects in " + provinces.get(ii)
+                    fi
+                    if choice2 == 5; then
+                        projectCount = fetchProjectCount(projectArray, provinces.get(ii)
+                        ongoingCount = fetchStageCount(projectArray, provinces.get(ii), "Ongoing"
+                        compltedCount = fetchStageCount(projectArray, provinces.get(ii), "Completed"
+                        percentageOfProvince = fetchProjectCount(projectArray, provinces.get(ii)) / (projectArray.length * 10
+                        ongoingPercentage = fetchPercentageData(projectArray, provinces.get(ii), "Ongoing"
+                        completedPercentage = fetchPercentageData(projectArray, provinces.get(ii), "Completed"
+
+                        OUTPUT "All stats in " + provinces.get(ii) + ":"
+                        OUTPUT "> Total projects: " + projectCount
+                        OUTPUT "> Percentage of all projects: " + percentageOfProvince + "%"
+                        OUTPUT "> Total ongoing projects: " + ongoingCount + " | " + ongoingPercentage + "%"
+                        OUTPUT "> Total completed projects: " + compltedCount + " | " + completedPercentage + "%"
+
+                    fi
+                    if choice2 == 0; then
+                        OUTPUT "Returning to main menu..."
+                    fi            
+
+            if choice != "All of Canada && choice != "Exit Program"; then
+                found = false
+                for ii in provinces.size(); do
+                    if choice == provinces.get(ii)
+                        found = true
+                    fi
+                done
+                if found == false; then
+                    OUTPUT "Invalid input, please try again."
+            fi
+
+        while running
+    END MAIN
+
+    METHOD fetchProjectCount IMPORT projectArray, province EXPORT total
+        total = 0
+        for ii in projectArray.length; do
+            if projectArray[ii].getProvince() == province; then
+                total++
+            fi
+        done
+    
+    METHOD fetchPercentageData IMPORT projectArray, province, stage EXPORT percentage
+        total = fetchProjectCount(projectArray, province)
+        stageTotal = fetchStageCount(projectArray, province, stage)
+        percentage = stageTotal / total * 100
+
+    METHOD fetchStageCount IMPORT projectArray, province stage
+        stageTotal = 0
+        for ii in projectArray.length; do
+            if projectArray[ii].getProvince() == province && projectArray[ii].getStage() == stage; then
+                stageTotal++
+            fi
+        done
+END
