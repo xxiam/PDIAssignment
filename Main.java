@@ -79,27 +79,27 @@ public class Main {
                         System.out.println("There are a total of " + projectCount + " projects in " + provinces.get(ii));
                     }
 
-                    if (choice2 == 2) {
+                    else if (choice2 == 2) {
                         int total = projectArray.length;
                         double percentage = (double)fetchProjectCount(projectArray, provinces.get(ii)) / (double)total * 100;
                         System.out.println("The percentage of all projects located in " + provinces.get(ii) + " is " + percentage + "%");
                     }
 
-                    if (choice2 == 3) {
+                    else if (choice2 == 3) {
                         double percentage = fetchPercentageData(projectArray, provinces.get(ii), "Ongoing");
                         int ongoingCount = fetchStageCount(projectArray, provinces.get(ii), "Ongoing");
                      
                         System.out.println("There is a total of " + ongoingCount + " ongoing projects in " + provinces.get(ii) + " which is " + percentage + "% of all projects in " + provinces.get(ii));
                     }
 
-                    if (choice2 == 4) {
+                    else if (choice2 == 4) {
                         double percentage = fetchPercentageData(projectArray, provinces.get(ii), "Completed");
                         int completedCount = fetchStageCount(projectArray, provinces.get(ii), "Completed");
                         
                         System.out.println("There is a total of " + completedCount + " completed projects in " + provinces.get(ii) + " which is " + percentage + "% of all projects in " + provinces.get(ii));
                     }
 
-                    if (choice2 == 5) {
+                    else if (choice2 == 5) {
                         //all of the above
                         int projectCount = fetchProjectCount(projectArray, provinces.get(ii));
                         int ongoingCount = fetchStageCount(projectArray, provinces.get(ii), "Ongoing");
@@ -115,7 +115,7 @@ public class Main {
                         System.out.println("> Total completed projects: " + compltedCount + " | " + completedPercentage + "%");
                     }
                     
-                    if (choice2 == 0) {
+                    else if (choice2 == 0) {
                         System.out.println("Returning to main menu...");
                     }
 
@@ -134,7 +134,7 @@ public class Main {
                     }
                 }
                 if (!found) {
-                    System.out.println("Invalid input. Please try again.");
+                    System.out.println("Invalid location. Please try again.");
                 }
             }
             
