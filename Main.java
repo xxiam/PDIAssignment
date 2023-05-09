@@ -35,6 +35,12 @@ public class Main {
             System.out.println("> Exit Program");
             
             String choice = sc.nextLine(); //user types in province
+            //make it case insenitive, allowing the user to type in all lowercase but still be able to work
+
+            if (choice.length() <= 0) {
+                System.out.println("Error, please provide a valid input");
+            }
+
             System.out.println("\n");
             if (choice.equals("All of Canada")) {
                 System.out.println("The total number of projects in Canada: " + projectArray.length);
@@ -139,6 +145,7 @@ public class Main {
             }
             
             System.out.println("\n");
+            //bug where after enquiring a location, the while loop loops twice without asking for user input
         }
     }
 
