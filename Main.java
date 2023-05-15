@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException{
         Scanner sc = new Scanner(System.in);
         String[] data = FileIO.parseCsv("./csvFiles/data.csv"); //parsing 9000+ lines
         Project[] projectArray = new Project[data.length - 1];
@@ -64,7 +64,7 @@ public class Main {
 
             else if (choice.equals("Exit Program")) {
                 System.out.println("Exiting...");
-                running = false;
+                return;
             }
 
             for (int ii = 0; ii < provinces.size(); ii++) {
@@ -127,7 +127,7 @@ public class Main {
 
                     else {
                         System.out.println("Invalid input. Please try again.");
-                    }
+                    }                    
                 }
             }
 
@@ -145,8 +145,24 @@ public class Main {
             }
             
             System.out.println("\n");
-            //bug where after enquiring a location, the while loop loops twice without asking for user input
+            running = false;
+            System.out.println("Would you like to continue?: y/n : ");
+            char choice3 = Character.toLowerCase(sc.next().charAt(0));
+            if (choice3 == 'y') {
+                running = true;
+                System.out.println("Continuing...");
+                sc.nextLine(); //clears buffer, fixes while loop bug
+            }
+            else if (choice3 == 'n') {
+                System.out.println("Exiting...");
+                return;
+            }
+            else {
+                System.out.println("Error, invalid input. Exiting..");
+                return;
+            }
         }
+        
     }
 
     private static int fetchProjectCount(Project[] projectArray, String province) {
