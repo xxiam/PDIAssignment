@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException{
         Scanner sc = new Scanner(System.in);
-        String[] data = FileIO.parseCsv("./csvFiles/data.csv"); //parsing 9000+ lines
+        String[] data = FileIO.parseCsv("./csvFiles/First_Nation_Infrastructure_Investment.csv"); //parsing 9000+ lines
         Project[] projectArray = new Project[data.length - 1];
         
         for (int i = 1; i < data.length; i++) {
